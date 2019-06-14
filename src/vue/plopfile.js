@@ -1,5 +1,5 @@
 // Project constructor setting
-const cust = require('./cust.config');
+const cust = require('./plop/cust.config');
 
 // Default helpers is below.
 // camelCase: changeFormatToThis
