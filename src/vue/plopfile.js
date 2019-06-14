@@ -1,4 +1,17 @@
-var path = require('path')
+// Project constructor setting
+const cust = require('./cust.config');
+
+// Default helpers is below.
+// camelCase: changeFormatToThis
+// snakeCase: change_format_to_this
+// dashCase/kebabCase: change-format-to-this
+// dotCase: change.format.to.this
+// pathCase: change/format/to/this
+// properCase/pascalCase: ChangeFormatToThis
+// lowerCase: change format to this
+// sentenceCase: Change format to this,
+// constantCase: CHANGE_FORMAT_TO_THIS
+// titleCase: Change Format To Thisd
 
 module.exports = function (plop) {
 
@@ -8,17 +21,30 @@ module.exports = function (plop) {
     prompts: [
       {
         type: 'input',
-        name: 'name',
-        message: 'enter component name please'
-      }
-    ],
-    actions: [
+        name: 'type',
+        message: 'Which of type component you want? selects: b or none for basic, d for decorator.'
+      },
       {
-        type: 'add',
-        path: path.resolve(__dirname, 'src/{{name}}.vue'),
-        template: 'templates/component.basic.hbs'
+        type: 'input',
+        name: 'name',
+        message: 'What\'s your component name?'
       }
     ],
+    actions: function (data) {
+      const actions = [];
+      const templateFileAdapter = {
+        'b': 'plop/templates/component.basic.hbs',
+        'd': 'plop/templates/component.decorator.hbs',
+        default: 'plop/templates/component.basic.hbs'
+      };
+      actions.push({
+        type: 'add',
+        path: cust.path.components + '{{ properCase name }}.vue',
+        templateFile: templateFileAdapter[data.type] || templateFileAdapter.default,
+      });
+
+      return actions;
+    }
   });
 
   // view generator

@@ -1,12 +1,12 @@
 <template>
-  <div class="{{name}}-container">
+  <div class="{{ dashCase name }}-container">
 
   </div>
 </template>
 
 <script>
 module.exports = {
-  name: {{ name }},
+  name: '{{ properCase name }}',
   data: () => ({}),
   watch: {},
   computed: {},
@@ -16,7 +16,7 @@ module.exports = {
 </script>
 
 <style lang="scss" scoped>
-  .{{name}}-container {
+  .{{ dashCase name }}-container {
 
   }
 </style>
