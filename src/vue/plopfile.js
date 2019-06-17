@@ -1,5 +1,9 @@
-// Project constructor setting
-const cust = require('./plop/cust.config');
+const componentMixin = require('./plop/generate-rules/component.rule');
+const viewMixin = require('./plop/generate-rules/view.rule');
+const routerMixin = require('./plop/generate-rules/router.rule');
+const serviceMixin = require('./plop/generate-rules/service.rule');
+const utilMixin = require('./plop/generate-rules/util.rule');
+const storeModuleMixin = require('./plop/generate-rules/store.module.rule');
 
 // Default helpers is below.
 // camelCase: changeFormatToThis
@@ -16,37 +20,21 @@ const cust = require('./plop/cust.config');
 module.exports = function (plop) {
 
   // component generator
-  plop.setGenerator('component', {
-    description: 'ui component',
-    prompts: [
-      {
-        type: 'input',
-        name: 'type',
-        message: 'Which of type component you want? selects: b or none for basic, d for decorator.'
-      },
-      {
-        type: 'input',
-        name: 'name',
-        message: 'What\'s your component name?'
-      }
-    ],
-    actions: function (data) {
-      const actions = [];
-      const templateFileAdapter = {
-        'b': 'plop/templates/component.basic.hbs',
-        'd': 'plop/templates/component.decorator.hbs',
-        default: 'plop/templates/component.basic.hbs'
-      };
-      actions.push({
-        type: 'add',
-        path: cust.path.components + '{{ properCase name }}.vue',
-        templateFile: templateFileAdapter[data.type] || templateFileAdapter.default,
-      });
-
-      return actions;
-    }
-  });
+  componentMixin(plop);
 
   // view generator
+  viewMixin(plop)
+
+  // router generator
+  routerMixin(plop)
+
+  // service generator
+  serviceMixin(plop)
+
+  // util generator
+  utilMixin(plop)
+
+  // store.module generator
+  storeModuleMixin(plop)
 
 };

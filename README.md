@@ -55,7 +55,7 @@ module.exports = {
 ```
 you can change the config file to fit your own project constructor.
 
-/*Notice*/ make sure the path string close with '/'
+*Notice* make sure the path string close with '/'
  
 
 
