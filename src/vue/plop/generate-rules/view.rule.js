@@ -3,38 +3,36 @@ const cust = require('../cust.config');
 
 module.exports = (plop) => {
 
-  plop.setGenerator('component', {
+  plop.setGenerator('view', {
 
-    description: 'ui component',
+    description: 'page view component',
 
     prompts: [
       {
         type: 'input',
         name: 'name',
-        message: 'What\'s your component name?'
+        message: 'What\'s your component name?',
       },
       {
-        type: 'input',
+        type: 'list',
         name: 'type',
-        message: 'Which of type component you want? selects: b or none for basic, d for decorator.'
+        message: 'Which type of component are you want?',
+        choices: ['basic', 'decorator'],
       },
     ],
 
     actions: function (data) {
+
       const templateFileAdapter = {
-        'b': 'plop/templates/component.basic.hbs',
-        'd': 'plop/templates/component.decorator.hbs',
+        'basic': 'plop/templates/view.basic.hbs',
+        'decorator': 'plop/templates/view.decorator.hbs',
         default: 'plop/templates/component.basic.hbs'
       };
 
       return [
         {
           type: 'add',
-          path: cust.path.views + '{{ properCase name }}',
-        },
-        {
-          type: 'add',
-          path: cust.path.views + '{{ properCase name }}/{{ properCase name }}.vue',
+          path: cust.path.views + '{{ properCase name }}/{{ properCase name }}Page.vue',
           templateFile: templateFileAdapter[data.type] || templateFileAdapter.default,
         },
         {

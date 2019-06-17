@@ -3,45 +3,25 @@ const cust = require('../cust.config');
 
 module.exports = (plop) => {
 
-  plop.setGenerator('component', {
+  plop.setGenerator('store.module', {
 
-    description: 'ui component',
+    description: 'generate store module',
 
     prompts: [
       {
         type: 'input',
         name: 'name',
-        message: 'What\'s your component name?'
-      },
-      {
-        type: 'input',
-        name: 'type',
-        message: 'Which of type component you want? selects: b or none for basic, d for decorator.'
+        message: 'What\'s your module name?'
       },
     ],
 
     actions: function (data) {
-      const templateFileAdapter = {
-        'b': 'plop/templates/component.basic.hbs',
-        'd': 'plop/templates/component.decorator.hbs',
-        default: 'plop/templates/component.basic.hbs'
-      };
-
       return [
         {
           type: 'add',
-          path: cust.path.components + '{{ properCase name }}',
+          path: cust.path.modules + '{{ camelCase name }}.js',
+          templateFile: 'plop/templates/store.module.basic.hbs',
         },
-        {
-          type: 'add',
-          path: cust.path.components + '{{ properCase name }}/{{ properCase name }}.vue',
-          templateFile: templateFileAdapter[data.type] || templateFileAdapter.default,
-        },
-        {
-          type: 'add',
-          path: cust.path.components + '{{ properCase name }}/index.js',
-          templateFile: 'plop/templates/index.hbs',
-        }
       ];
     }
   });

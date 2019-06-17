@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export default class {{ properCase name }}Service {
-  baseUrl = '{{ baseUrl }}'
+export default class UserService {
+  baseUrl = '/api/user'
 
   // Create
   create (params) {
