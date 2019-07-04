@@ -1,7 +1,7 @@
 # plop-setting
 
 ## Install first
-You need to install global plop.
+You need to install global plop and local plop.
 
 - npm install -g plop
 
@@ -21,17 +21,52 @@ if your project is react
 
 ## usage
 
-- generate component:
+- basic usage:
 
-type can be "b" for basic vanilla javascript Vue or "d" for decorator Vue component
-that was build by "vue-property-decorator".
+just enter "plop" and follow bash selector
 
 ```bash
-plop component <type> <name>
+plop
+
+// ... then you can generate as follow
+❯ component - ui component
+  view - page view component
+  router - generate router
+  service - generate api control service
+  util - generate util
+  store.module - generate store module
+```
+
+you can enter step by step, or just enter at once
+
+```javascript
+// util
+plop util signup
+```
+
+- generate component:
+
+ui component and page view has two type: 'basic' and 'decorator'
+
+```bash
+plop component <name> <type>
 
 example:
 
-plop component -d user
+// view
+plop util login basic
+
+// ui component
+plop component singup decorator
+```
+
+- generate service:
+
+servcie need to enter base url at last
+
+```javascript
+// service
+plop service user /api/user
 ```
 
 ## customize project constructor
@@ -56,6 +91,12 @@ module.exports = {
 you can change the config file to fit your own project constructor.
 
 *Notice* make sure the path string close with '/'
+
+## customize template
+
+find out /plop/templates and change the template you want.
+
+follow [Handlebars](https://handlebarsjs.com/) rules
  
 
 
